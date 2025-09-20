@@ -1,4 +1,4 @@
-<h1 align="center"> 📦 Logibox Frontend </h1>  <br>
+<h1 align="center"> 📦 Logibox Frontend </h1>  <br><br>
 
 A *Logibox* é um sistema de gerenciamento de estoque. Este repositório contém *apenas a parte de front-end* do projeto, construída com *HTML, CSS, JavaScript* e *Bootstrap*, seguindo boas práticas de organização de pastas e versionamento com Git.
 <br>
