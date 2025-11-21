@@ -645,7 +645,7 @@ main {
      background-color: var(--component-bg-1);
      box-shadow: 2px 1px 20px var(--component-shadow);
      border-radius: 14px;
-     overflow-x: hidden;
+    overflow: visible;
 }
 
 /* =========================================================
@@ -658,8 +658,9 @@ main {
      gap: 20px;
      padding: 14px 0 18px 0;
      border-bottom: 2px solid var(--component-separator);
-     width: 100%; /* ADICIONAR ESTA LINHA */
+     width: 100%; 
      box-sizing: border-box; 
+     overflow: hidden;
 }
 
 /* Input de pesquisa */
@@ -719,7 +720,7 @@ main {
 
 .envoltura_tabela {
      overflow-x: auto;
-     overflow-y: auto;
+     overflow-y:visible;
      width: 100%;
      margin-top: 20px;
      scroll-behavior: smooth;
@@ -756,20 +757,39 @@ main {
                       TABLE OPTIONS MENU
 ========================================================= */
 
+/* =========================================================
+                      TABLE OPTIONS MENU
+========================================================= */
+
+.container_opcoes {
+     position: relative;
+}
+
 .botao_opcoes {
      background-color: transparent;
      border: none;
      font-size: var(--fs-lg);
      color: var(--text-highcontrast);
+     position: relative;
+}
+
+.menu_container {
+    position: absolute;
+    z-index: 999999;
+    overflow: visible;
+    display: none;
 }
 
 .menu_opcoes {
      background-color: var(--component-bg-2);
-     border-radius: 5px;
-     display: none;
-     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-     position: absolute;
-     padding: 15px 10px;
+     border-radius: 8px;
+     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+     position: fixed;
+     padding: 10px 0; 
+     z-index: 10000;
+     min-width: 150px; 
+     max-width: 180px;
+     border: 1px solid var(--component-separator);
 }
 
 .menu_opcoes ul {
@@ -801,7 +821,6 @@ main {
 .menu_opcoes.ativo {
      display: block;
 }
-
 .botao_acao:hover {
      color: var(--logo-primary); 
 }
@@ -963,6 +982,10 @@ main {
 /* =========================================================
                        POPup e Highlitht
 ========================================================= */
+.highlight {
+    background-color: var(--logo-hover);
+    padding: 1px 2px;
+}
 
 .highlight {
     background-color: var(--logo-hover);
@@ -977,9 +1000,10 @@ main {
     background-color: var(--component-bg-2);
     border-radius: 5px;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px var(--component-shadow);
     width: 200px;
     color: var(--text-main);
+    z-index: 999;
 }
 
 .popup_filtro form {
@@ -1245,7 +1269,7 @@ main {
 
     .table_conteudo th,
     .table_conteudo td {
-        padding: 0px 5px;
+        padding: 5px 15px;
     }
 }
 
