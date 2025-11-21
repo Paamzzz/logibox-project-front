@@ -30,6 +30,24 @@
                          <i class="bi bi-filter"></i>
                     </button>
 
+                      <div class="popup_filtro" id="popupFiltro">
+                         <form method="GET" action="http://136.248.93.91/usuario.php">
+                              <b>Sexo:</b><br>
+                              <input type="radio" name="sexo" value="masculino"> Masculino<br>
+                              <input type="radio" name="sexo" value="feminino"> Feminino<br><br>
+
+                              <b>Tipo de usuário:</b><br>
+                              <input type="radio" name="tipoUsuario" value="usuario"> Usuário<br>
+                              <input type="radio" name="tipoUsuario" value="administrador"> Administrador<br><br>
+
+                              <b>Ordenar por:</b><br>
+                              <input type="radio" name="ordenar" value="asc"> A-Z<br>
+                              <input type="radio" name="ordenar" value="desc"> Z-A<br><br>
+
+                              <button type="submit" class="btn_filtrar">Aplicar filtros</button>
+                         </form>
+                    </div>
+
                     <button class="botao_acao_tabela" id="download-button" title="Baixar" aria-label="Baixar tabela">
                          <i class="bi bi-download"></i>
                     </button>
@@ -57,6 +75,21 @@
                </div>
           </div>
      </div>
+
+       <div class="menu_opcoes" id="menuUnico">
+          <ul>
+               <li><button class="botao_acao"><i class="bi bi-pencil-fill"></i>
+                         Editar</button></li>
+               <li><button class="botao_acao"><i class="bi bi-eye-fill"></i>
+                         Visualizar</button></li>
+               <li><button class="botao_acao"><i class="bi bi-trash-fill"></i>
+                         Excluir</button></li>
+          </ul>
+     </div>
+
+      <div id="backdrop" class="backdrop"></div> <!-- adiciona um backdrop para o sidebar em telas pequenas -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
 
 <script src="script.js"></script>

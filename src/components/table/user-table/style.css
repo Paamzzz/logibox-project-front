@@ -96,8 +96,6 @@ body.font-large {
      box-sizing: border-box;
      width: 100%;
 }
-
-
 .container_tabela {
      position: relative;
      justify-self: center;
@@ -108,26 +106,25 @@ body.font-large {
      background-color: var(--component-bg-1);
      box-shadow: 2px 1px 20px var(--component-shadow);
      border-radius: 14px;
-    overflow-x: hidden;
-    }
+     overflow: visible;
+}
 
 /* =========================================================
                       ÁREA DE AÇÕES
 ========================================================= */
+
 .acoes_tabela {
      display: flex;
      justify-content: center;
      gap: 20px;
      padding: 14px 0 18px 0;
      border-bottom: 2px solid var(--component-separator);
-     width: 100%; /* ADICIONAR ESTA LINHA */
+     width: 100%; 
      box-sizing: border-box; 
+     overflow: hidden;
 }
 
 /* Input de pesquisa */
-
-/* ! Tive que mexer neste input para deixar mais semelhante ao do protótipo */
-
 .input_padrao {
      border: 1px solid var(--component-dark-1);
      border-radius: 20px;
@@ -147,7 +144,6 @@ body.font-large {
      display: inline-block;
      padding-left: 2.2em;
      cursor: pointer;
-
 }
 
 .input_pesquisa i {
@@ -161,7 +157,6 @@ body.font-large {
 }
 
 /* Botões de ação da tabela */
-
 .botao_acao_tabela {
      background-color: transparent;
      border: none;
@@ -186,7 +181,7 @@ body.font-large {
 
 .envoltura_tabela {
      overflow-x: auto;
-     overflow-y: auto;
+     overflow-y:visible;
      width: 100%;
      margin-top: 20px;
      scroll-behavior: smooth;
@@ -207,7 +202,6 @@ body.font-large {
      padding: 5px 30px;
      text-align: center;
      white-space: nowrap;
-
 }
 
 .table_conteudo tr td {
@@ -224,22 +218,36 @@ body.font-large {
                       TABLE OPTIONS MENU
 ========================================================= */
 
+.container_opcoes {
+     position: relative;
+}
+
 .botao_opcoes {
      background-color: transparent;
      border: none;
      font-size: var(--fs-lg);
      color: var(--text-highcontrast);
+     position: relative;
+}
+
+.menu_container {
+    position: absolute;
+    z-index: 999999;
+    overflow: visible;
+    display: none;
 }
 
 .menu_opcoes {
      background-color: var(--component-bg-2);
-     border-radius: 5px;
-     display: none;
-     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-     position: absolute;
-     padding: 15px 10px;
+     border-radius: 8px;
+     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+     position: fixed;
+     padding: 10px 0; 
+     z-index: 10000;
+     min-width: 150px; 
+     max-width: 180px;
+     border: 1px solid var(--component-separator);
 }
-
 
 .menu_opcoes ul {
      padding: 5px;
@@ -270,7 +278,6 @@ body.font-large {
 .menu_opcoes.ativo {
      display: block;
 }
-
 .botao_acao:hover {
      color: var(--logo-primary); 
 }
@@ -278,6 +285,56 @@ body.font-large {
 .botao_acao:hover i {
      color: var(--logo-primary); 
 }
+
+/* =========================================================
+                       POPup e Highlitht
+========================================================= */
+
+.highlight {
+    background-color: var(--logo-hover);
+    padding: 1px 2px;
+}
+
+.popup_filtro {
+    display: none;
+    position: absolute;
+    top: 60px; 
+    right: 20px;
+    background-color: var(--component-bg-2);
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    color: var(--text-main);
+}
+
+.popup_filtro form {
+    font-size: var(--fs-sm);
+}
+
+.popup_filtro input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+.btn_filtrar {
+    background-color: var(--logo-primary);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn_filtrar:hover {
+    background-color: var(--logo-hover);
+}
+
+
 
 /* =========================================================
                    MEDIA QUERY - TABLE
@@ -326,6 +383,6 @@ body.font-large {
 
     .table_conteudo th,
     .table_conteudo td {
-        padding: 0px 10px;
+       padding: 5px 15px;
     }
 }
