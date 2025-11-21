@@ -1,0 +1,393 @@
+/* =========================================================
+                          VARIÁVEIS
+========================================================= */
+
+:root {
+     /* === Fontes === */
+     --font-family-base: "Lato", sans-serif;
+
+     /* === Cores === */
+     --logo-primary: #ad0000;
+     --logo-secondary: #4c180c;
+     --logo-hover: #ca00007e;
+     --logo-active: #ca00003d;
+
+     --text-highcontrast: #070707;
+     --text-main: #161616;
+     --text-hierarchy-1: #363636;
+     --text-hierarchy-2: #504f4f;
+     --text-disabled: #838382;
+     --text-disabled-contrast: #b9b8b8;
+     --text-oposite: #fffbfb;
+
+     --component-separator: #e9e7e2;
+     --component-dark-1: #797877;
+     --component-dark-2: #454544;
+     --component-dark-main: #393938;
+     --component-blue: #5b6073;
+     --component-disabled: #d9d7d5;
+     --component-shadow: #1a1a1a48;
+     --component-bg-main: #f3f5f7;
+     --component-bg-1: #fffefa;
+     --component-bg-2: #f9f6f4;
+     --component-bg-dashboard: #f3f5f7;
+}
+
+:root.darkmode {
+     --text-highcontrast: #f8f8f8;
+     --text-main: #ededed;
+     --text-hierarchy-1: #cfcfcf;
+     --text-hierarchy-2: #a7a7a7;
+     --text-disabled: #7b7b7b;
+     --text-disabled-contrast: #5e5e5e;
+     --text-oposite: #080808;
+
+     --component-separator: #2b2b2b;
+     --component-dark-1: #9b9b9b;
+     --component-dark-2: #c5c5c5;
+     --component-dark-main: #d9d9d9;
+     --component-blue: #8d96b8;
+     --component-disabled: #4b4b4b;
+       --component-shadow: #0000004b;
+     --component-bg-main: #1c1c1c;
+     --component-bg-1: #212121;
+     --component-bg-2: #2a2a2a;
+     --component-bg-dashboard: #1c1c1c;
+}
+/* =========================================================
+                     TAMANHO DE FONTE
+========================================================= */
+body.font-small {
+     --fs-xs: clamp(12px, 1.3vw, 13.5px);
+     --fs-sm: clamp(13px, 1.4vw, 14.5px);
+     --fs-md: clamp(14.5px, 1.6vw, 16px);
+     --fs-lg: clamp(20px, 2.2vw, 23.5px);
+     --fs-xl: clamp(32px, 3.6vw, 41px);
+     --fs-xxl: clamp(36px, 4.5vw, 47px);
+}
+
+body.font-normal {
+     --fs-xs: clamp(13px, 1.5vw, 15px);
+     --fs-sm: clamp(14px, 1.6vw, 16px);
+     --fs-md: clamp(16px, 1.8vw, 18px);
+     --fs-lg: clamp(22px, 2.5vw, 26px);
+     --fs-xl: clamp(36px, 4vw, 46px);
+     --fs-xxl: clamp(40px, 5vw, 52px);
+}
+
+body.font-large {
+     --fs-xs: clamp(14px, 1.7vw, 16.5px);
+     --fs-sm: clamp(15.5px, 1.8vw, 18px);
+     --fs-md: clamp(18px, 2vw, 20.5px);
+     --fs-lg: clamp(24.5px, 2.8vw, 29.5px);
+     --fs-xl: clamp(40px, 4.5vw, 52px);
+     --fs-xxl: clamp(44px, 5.5vw, 60px);
+}
+
+
+/* =================== TABLE CONTAINER ====================*/
+
+.content_geral {
+     display: flex;
+     flex-direction: column; /* Deixa o conteúdo empilhado (texto em cima, tabela embaixo) */
+     align-items: center; /* Centraliza horizontalmente */
+     min-height: 100vh;
+     padding: 20px;
+     box-sizing: border-box;
+     width: 100%;
+}
+.container_tabela {
+     position: relative;
+     justify-self: center;
+     width: 100%;
+     max-width: 900px;
+     min-height: 700px;
+     height: auto;
+     background-color: var(--component-bg-1);
+     box-shadow: 2px 1px 20px var(--component-shadow);
+     border-radius: 14px;
+     overflow: visible;
+}
+
+/* =========================================================
+                      ÁREA DE AÇÕES
+========================================================= */
+
+.acoes_tabela {
+     display: flex;
+     justify-content: center;
+     gap: 20px;
+     padding: 14px 0 18px 0;
+     border-bottom: 2px solid var(--component-separator);
+     width: 100%; 
+     box-sizing: border-box; 
+     overflow: hidden;
+}
+
+/* Input de pesquisa */
+.input_padrao {
+     border: 1px solid var(--component-dark-1);
+     border-radius: 20px;
+     color: var(--text-main);
+     padding: 10px 12px;
+     outline: none;
+     box-sizing: border-box;
+     background-color: transparent;
+     padding-left: 40px;
+     max-width: 100%;
+     width: 300px;
+     font-size: var(--fs-sm);
+}
+
+.input_pesquisa {
+     position: relative;
+     display: inline-block;
+     padding-left: 2.2em;
+     cursor: pointer;
+}
+
+.input_pesquisa i {
+     position: absolute;
+     top: 50%;
+     left: 48px;
+     transform: translateY(-50%);
+     font-size: 1em;
+     pointer-events: none;
+     color: var(--text-main);
+}
+
+/* Botões de ação da tabela */
+.botao_acao_tabela {
+     background-color: transparent;
+     border: none;
+     color: var(--text-highcontrast);
+     border-radius: 100%;
+     width: 40px;
+     height: 40px;
+     transition: all 0.3s ease;
+}
+
+.botao_acao_tabela i {
+     font-size: var(--fs-lg);
+}
+
+.botao_acao_tabela:hover {
+     background-color: var(--component-separator);
+}
+
+/* =========================================================
+                      TABLE CELL
+========================================================= */
+
+.envoltura_tabela {
+     overflow-x: auto;
+     overflow-y:visible;
+     width: 100%;
+     margin-top: 20px;
+     scroll-behavior: smooth;
+     border-radius: 10px;
+     color: var(--text-highcontrast);
+}
+
+.table_conteudo {
+     border-collapse: collapse;
+     font-size: var(--fs-sm);
+     width: 100%;
+     min-width: 600px;
+     text-align: center;
+}
+
+.table_conteudo th,
+.table_conteudo td {
+     padding: 5px 30px;
+     text-align: center;
+     white-space: nowrap;
+}
+
+.table_conteudo tr td {
+     border-bottom: 1px solid var(--component-separator);
+     padding-bottom: 18px;
+}
+
+.table_conteudo td {
+     text-overflow: ellipsis;
+     max-width: 230px;
+}
+
+/* =========================================================
+                      TABLE OPTIONS MENU
+========================================================= */
+
+.container_opcoes {
+     position: relative;
+}
+
+.botao_opcoes {
+     background-color: transparent;
+     border: none;
+     font-size: var(--fs-lg);
+     color: var(--text-highcontrast);
+     position: relative;
+}
+
+.menu_container {
+    position: absolute;
+    z-index: 999999;
+    overflow: visible;
+    display: none;
+}
+
+.menu_opcoes {
+     background-color: var(--component-bg-2);
+     border-radius: 8px;
+     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+     position: fixed;
+     padding: 10px 0; 
+     z-index: 10000;
+     min-width: 150px; 
+     max-width: 180px;
+     border: 1px solid var(--component-separator);
+}
+
+.menu_opcoes ul {
+     padding: 5px;
+}
+
+.menu_opcoes li {
+     list-style: none;
+     padding: 8px 5px 8px;
+     color: var(--text-main);
+     transition: 0.3s ease;
+     text-align: left;
+}
+
+.menu_opcoes li:hover {
+     color: var(--text-hierarchy-2);
+}
+
+.botao_acao {
+     background-color: transparent;
+     border: none;
+     color: var(--text-highcontrast);
+}
+
+.botao_acao i {
+     padding-right: 7px;
+}
+
+.menu_opcoes.ativo {
+     display: block;
+}
+.botao_acao:hover {
+     color: var(--logo-primary); 
+}
+
+.botao_acao:hover i {
+     color: var(--logo-primary); 
+}
+
+/* =========================================================
+                       POPup e Highlitht
+========================================================= */
+
+.highlight {
+    background-color: var(--logo-hover);
+    padding: 1px 2px;
+}
+
+.highlight {
+    background-color: var(--logo-hover);
+    padding: 1px 2px;
+}
+
+.popup_filtro {
+    display: none;
+    position: absolute;
+    top: 60px; 
+    right: 20px;
+    background-color: var(--component-bg-2);
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 4px 8px var(--component-shadow);
+    width: 200px;
+    color: var(--text-main);
+    z-index: 999;
+}
+
+.popup_filtro form {
+    font-size: var(--fs-sm);
+}
+
+.popup_filtro input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+.btn_filtrar {
+    background-color: var(--logo-primary);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn_filtrar:hover {
+    background-color: var(--logo-hover);
+}
+
+
+/* =========================================================
+                   MEDIA QUERY - TABLE
+========================================================= */
+
+@media (max-width: 750px) {
+    .acoes_tabela {
+        gap: 8px;
+    }
+
+    .input_pesquisa {
+        max-width: 90%;
+    }
+
+    .table_conteudo {
+        min-width: 500px;
+    }
+
+    .envoltura_tabela {
+        overflow-x: auto;
+    }
+
+    .input_padrao {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 450px) {
+    .acoes_tabela {
+        gap: 1px;
+    }
+
+    .botao_acao_tabela i {
+        font-size: 18px;
+    }
+
+    .input_pesquisa {
+        padding-left: 10px;
+    }
+
+    .input_pesquisa i {
+        left: 20px;
+        font-size: 15px;
+    }
+
+    .table_conteudo th,
+    .table_conteudo td {
+       padding: 0px 5px;
+    }
+}
