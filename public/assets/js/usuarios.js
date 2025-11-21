@@ -8,19 +8,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const linhasTabela = document.querySelectorAll(".table_conteudo tbody tr");
 
     function limparDestaques(elemento) {
-        elemento.innerHTML = elemento.textContent; // Remove spans anteriores
+        elemento.innerHTML = elemento.textContent;
     }
 
     function destacarTexto(celula, termo) {
         const textoOriginal = celula.textContent;
-        const regex = new RegExp(`(${termo})`, "gi"); // Modificado para buscar sem se preocupar com acentos
+        const regex = new RegExp(`(${termo})`, "gi");
         celula.innerHTML = textoOriginal.replace(regex, `<span class="highlight">$1</span>`);
     }
 
     function filtrarTabela() {
         const termo = inputPesquisa.value.trim().toLowerCase();
-
-        // Separar termos por vírgula e remover espaços extras
         const termos = termo.split(",").map(t => t.trim()).filter(t => t !== "");
 
         linhasTabela.forEach(linha => {
@@ -28,9 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
             let corresponde = false;
 
             celulas.forEach(celula => {
-                limparDestaques(celula); // Limpa antes de aplicar novamente
+                limparDestaques(celula);
 
-                // Verificar se qualquer um dos termos está presente na célula
                 if (termos.some(termo => celula.textContent.toLowerCase().includes(termo))) {
                     corresponde = true;
                     termos.forEach(termo => {
@@ -41,12 +38,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
-            // Se corresponder a qualquer termo, mostra a linha, senão esconde
             linha.style.display = corresponde || termos.length === 0 ? "" : "none";
         });
     }
 
     inputPesquisa.addEventListener("input", filtrarTabela);
+
 
 
     /* ========================================
@@ -61,87 +58,132 @@ document.addEventListener("DOMContentLoaded", () => {
         popupFiltro.style.display = popupFiltro.style.display === "block" ? "none" : "block";
     });
 
-    // Fecha o popup se clicar fora dele
     document.addEventListener("click", (e) => {
         if (!popupFiltro.contains(e.target) && e.target !== filterButton) {
             popupFiltro.style.display = "none";
         }
     });
 
+
+
+    /* ========================================
+                DESMARCAR RADIOS
+    ======================================== */
+
     const radios = popupFiltro.querySelectorAll('input[type="radio"]');
     let radioSelecionado = null;
 
-        radios.forEach(radio => {
+    radios.forEach(radio => {
         radio.addEventListener('click', () => {
             if (radioSelecionado === radio) {
-            radio.checked = false; // desseleciona
-            radioSelecionado = null;
+                radio.checked = false;
+                radioSelecionado = null;
             } else {
-            radioSelecionado = radio;
+                radioSelecionado = radio;
             }
         });
     });
 
-    /* ======================================== 
+
+
+    /* ========================================
+            FILTRO FUNCIONAL
+    ======================================== */
+
+    document.querySelector(".btn_filtrar").addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const sexoFiltro = popupFiltro.querySelector('input[name="sexo"]:checked')?.value;
+        const tipoFiltro = popupFiltro.querySelector('input[name="tipoUsuario"]:checked')?.value;
+        const ordenar = popupFiltro.querySelector('input[name="ordenar"]:checked')?.value;
+
+        const linhas = [...document.querySelectorAll("tbody tr")];
+
+        linhas.forEach(linha => {
+            const nomeLinha = linha.children[1].textContent.trim().toLowerCase();
+            const tipoLinha = linha.children[2].textContent.trim().toLowerCase();
+            const sexoLinha = linha.children[4].textContent.trim().toLowerCase();
+
+            let mostrar = true;
+
+            if (sexoFiltro) {
+                if (sexoFiltro === "masculino" && sexoLinha !== "m") mostrar = false;
+                if (sexoFiltro === "feminino" && sexoLinha !== "f") mostrar = false;
+            }
+
+            if (tipoFiltro) {
+                if (tipoFiltro === "usuario" && tipoLinha !== "comum") mostrar = false;
+                if (tipoFiltro === "administrador" && tipoLinha !== "administrador") mostrar = false;
+            }
+
+            linha.style.display = mostrar ? "" : "none";
+        });
+
+        if (ordenar) {
+            const tbody = document.querySelector("tbody");
+
+            const ordenado = linhas.sort((a, b) => {
+                const nomeA = a.children[1].textContent.trim().toLowerCase();
+                const nomeB = b.children[1].textContent.trim().toLowerCase();
+
+                return ordenar === "asc"
+                    ? nomeA.localeCompare(nomeB)
+                    : nomeB.localeCompare(nomeA);
+            });
+
+            ordenado.forEach(l => tbody.appendChild(l));
+        }
+
+        popupFiltro.style.display = "none";
+    });
+
+
+
+    /* ========================================
             GERAR PDF DA TABELA
     ======================================== */
 
     document.getElementById("download-button").addEventListener("click", async () => {
         const { jsPDF } = window.jspdf;
 
-        // Seleciona a tabela original
         const tabelaOriginal = document.querySelector(".envoltura_tabela");
-
-        // Clona a tabela para edição sem afetar a original
         const cloneTabela = tabelaOriginal.cloneNode(true);
 
-        // === Identifica o índice da coluna "Opções" ===
         const ths = cloneTabela.querySelectorAll("th");
         let indiceOpcoes = -1;
+
         ths.forEach((th, i) => {
-            if (th.textContent.trim().toLowerCase() === "opções") {
-                indiceOpcoes = i;
-            }
+            if (th.textContent.trim().toLowerCase() === "opções") indiceOpcoes = i;
         });
 
-        // Se encontrou a coluna "Opções", remove ela de todas as linhas
         if (indiceOpcoes !== -1) {
             cloneTabela.querySelectorAll("tr").forEach(tr => {
                 const cells = tr.querySelectorAll("th, td");
-                if (cells[indiceOpcoes]) {
-                    cells[indiceOpcoes].remove();
-                }
+                if (cells[indiceOpcoes]) cells[indiceOpcoes].remove();
             });
         }
 
-        // Cria container invisível temporário
         const tempDiv = document.createElement("div");
         tempDiv.style.position = "absolute";
         tempDiv.style.left = "-9999px";
         tempDiv.appendChild(cloneTabela);
         document.body.appendChild(tempDiv);
 
-        // Mostra ícone de carregamento
         const botao = document.getElementById("download-button");
         botao.innerHTML = '<i class="bi bi-hourglass-split"></i>';
         botao.disabled = true;
 
-        // Converte a tabela clonada em imagem
-        const canvas = await html2canvas(tempDiv, {
-            scale: 2,
-            useCORS: true,
-            logging: false
-        });
+        const canvas = await html2canvas(tempDiv, { scale: 2, useCORS: true, logging: false });
 
         const imgData = canvas.toDataURL("image/png");
         const pdf = new jsPDF("p", "mm", "a4");
+
         const imgWidth = 190;
         const pageHeight = 297;
         const imgHeight = (canvas.height * imgWidth) / canvas.width;
         let heightLeft = imgHeight;
         let position = 10;
 
-        // Adiciona imagem ao PDF
         pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
         heightLeft -= pageHeight;
 
@@ -152,16 +194,13 @@ document.addEventListener("DOMContentLoaded", () => {
             heightLeft -= pageHeight;
         }
 
-        // Salva o PDF
         pdf.save("Tabela de Usuários.pdf");
-
-        // Remove o clone temporário
         document.body.removeChild(tempDiv);
 
-        // Restaura o botão
         botao.innerHTML = '<i class="bi bi-download"></i>';
         botao.disabled = false;
     });
+
 
 
     /* ========================================
@@ -189,7 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Fecha alert1
-    document.querySelectorAll("#alert1 .fechar_modal, #alert1 .botao_cancelar, #alert1 .botao_delete")
+    document.querySelectorAll("#alert1 .fechar_modal, #alert1 .botao_delete")
         .forEach(btn => btn.addEventListener("click", () => fecharAlert("alert1")));
 
     // Fecha alert2

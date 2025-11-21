@@ -53,7 +53,7 @@
 
 
                     <div class="header_user_img">
-                        <img src="../../../public/assets/img/userImg.png" alt="Imagem do usuario">
+                        <img src="../assets//img/userImg.png" alt="Imagem do usuario">
                     </div>
                     <div class="header_user_text">
                         <span class="header_username">Nome Sobrenome</span>
@@ -229,7 +229,7 @@
                         </button>
 
                         <div class="popup_filtro" id="popupFiltro">
-                            <form method="GET" action="http://136.248.93.91/usuario.php">
+                            <form method="GET">
                                 <b>Sexo:</b><br>
                                 <input type="radio" name="sexo" value="masculino"> Masculino<br>
                                 <input type="radio" name="sexo" value="feminino"> Feminino<br><br>
@@ -317,22 +317,24 @@
         </div>
     </div>
 
-    <div class="alert_modelo" id="alert1">
-        <div class="conteudo_alert">
-            <span class="fechar_modal" onclick="fecharAlert('alert1')">&times;</span>
-            <div class="icone_modal">
-                <div class="icone_modal_fill">
-                    <i class="bi bi-trash-fill"></i>
+    <form method="post">
+        <div class="alert_modelo" id="alert1">
+            <div class="conteudo_alert">
+                <span class="fechar_modal" onclick="fecharAlert('alert1')">&times;</span>
+                <div class="icone_modal">
+                    <div class="icone_modal_fill">
+                        <i class="bi bi-trash-fill"></i>
+                    </div>
+                </div>
+                <h2>Deletar Usuário?</h2>
+                <p>Deseja realmente deletar esse usuário? Essa ação é irreversível.</p>
+                <div class="botoes_modal">
+                    <button type="submit" class="botao_cancelar">Sim, deletar</button>
+                    <button type="button" class="botao_delete" onclick="fecharAlert('alert1')">Cancelar</button>
                 </div>
             </div>
-            <h2>Deletar Usuário?</h2>
-            <p>Deseja realmente deletar esse usuário? Essa ação é irreversível.</p>
-            <div class="botoes_modal">
-                <button class="botao_cancelar" onclick="fecharAlert('alert1')">Sim, deletar</button>
-                <button class="botao_delete" onclick="fecharAlert('alert1')">Cancelar</button>
-            </div>
         </div>
-    </div>
+    </form>
 
     <div id="backdrop" class="backdrop"></div> <!-- adiciona um backdrop para o sidebar em telas pequenas -->
 
