@@ -1,9 +1,18 @@
+import { initAuth, logout } from '../assets/js/utils/auth.js';
+
 document.addEventListener("DOMContentLoaded", () => {
+    initAuth();
+
+    // Botão de logout
+    const btnLogout = document.getElementById('btn-logout');
+    if (btnLogout) {
+        btnLogout.addEventListener('click', logout);
+    }
 
     /* =========================================================
                              SIDEBAR
     ========================================================= */
-
+ 
     const body = document.querySelector("body");
     const sidebar = body.querySelector(".sidebar");
     const layout_wrapper = document.querySelector(".layout_wrapper");
