@@ -251,40 +251,64 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ========================================
-             BOTÃO OPÇÕES / MENUS
-    ======================================== */
+                 MENUS DE OPÇÕES 
+ ======================================== */
 
-    const buttons = document.querySelectorAll('.botao_opcoes');
+     const buttons = document.querySelectorAll(".botao_opcoes");
+     const menuUnico = document.getElementById("menuUnico");
+     let produtoSelecionado = null;
 
-    function closeAllMenus() {
-        document.querySelectorAll('.menu_opcoes.ativo').forEach(m => m.classList.remove('ativo'));
-        buttons.forEach(b => b.setAttribute('aria-expanded', 'false'));
-    }
+     if (buttons.length > 0 && menuUnico) {
+          buttons.forEach(btn => {
+               btn.addEventListener("click", (e) => {
+                    e.stopPropagation();
 
-    buttons.forEach(button => {
-        const container = button.closest('.container_opcoes');
-        if (!container) return;
-        const menu = container.querySelector('.menu_opcoes');
-        if (!menu) return;
+                    const rect = btn.getBoundingClientRect();
 
-        menu.addEventListener('click', e => e.stopPropagation());
+                    // Posição inicial
+                    let top = rect.bottom + window.scrollY + 5;
+                    let left = rect.left + window.scrollX;
 
-        button.addEventListener('click', e => {
-            e.stopPropagation();
-            const isOpen = menu.classList.contains('ativo');
+                    // Verifica largura do menu para evitar sair da tela
+                    const menuWidth = menuUnico.offsetWidth;
+                    const screenWidth = window.innerWidth;
 
-            closeAllMenus();
+                    // Se o menu passar da tela, reposiciona mais pra esquerda
+                    if (left + menuWidth > screenWidth) {
+                         left = screenWidth - menuWidth - 10; // 10px de margem
+                    }
 
-            if (!isOpen) {
-                menu.classList.add('ativo');
-                button.setAttribute('aria-expanded', 'true');
-            } else {
-                menu.classList.remove('ativo');
-                button.setAttribute('aria-expanded', 'false');
-            }
-        });
-    });
+                    // Aplica as posições finais
+                    menuUnico.style.top = `${top}px`;
+                    menuUnico.style.left = `${left}px`;
+                    menuUnico.style.display = 'block';
+                    // PEGA TODOS OS DADOS DA LINHA AUTOMATICAMENTE
+                    const linha = btn.closest('tr');
+                    produtoSelecionado = {
+                         id: linha.dataset.idUser
+                    };
 
-    document.addEventListener('click', closeAllMenus);
+                    console.log("Produto selecionado:", produtoSelecionado);
+               });
+          });
 
+          document.addEventListener("click", () => {
+               menuUnico.style.display = 'none';
+          });
+
+          menuUnico.querySelectorAll('.botao_acao').forEach(btn => {
+               btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const acao = btn.textContent.trim().split(' ')[0].toLowerCase();
+
+                    // Agora temos TODOS os dados do produto
+                    alert(`${acao} produto:\nID: ${produtoSelecionado.id}\nNome: ${produtoSelecionado.nome}\nCategoria: ${produtoSelecionado.categoria}`);
+
+                    // Para usar na integração:
+                    console.log(`Ação: ${acao}`, produtoSelecionado);
+
+                    menuUnico.style.display = 'none';
+               });
+          });
+     }
 });
