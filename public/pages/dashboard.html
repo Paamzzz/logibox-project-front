@@ -213,45 +213,47 @@
           </div>
 
           <main>
-              <div class="dashboard_container">
-    <div class="dashboard_cabecalho">
-        <h1>Dashboard</h1>
-        <p>Bem vindo(a), <span class="usuario_nome">userName</span></p>
-    </div>
+               <div class="dashboard_container">
+                    <div class="dashboard_cabecalho">
+                         <h1>Dashboard</h1>
+                         <p>Bem vindo(a), <span class="usuario_nome">userName</span></p>
+                    </div>
 
-    <div class="dashboard_dados">
-        <div class="linha_dados">
-            <div class="bloco_dado">
-                <h2>Total de produtos</h2> <!-- Corrigi: era </p> -->
-                <p class="valor_dado" id="quant_produto">00</p>
-            </div>
-            <div class="bloco_dado">
-                <h2>Total de ações no log</h2> <!-- Corrigi: era </p> -->
-                <p class="valor_dado" id="quant_ações">00</p>
-            </div>
-            <div class="bloco_dado">
-                <h2>Total de usuários</h2>
-                <p class="valor_dado" id="quant_user">00</p>
-            </div>
-        </div>
-        
-        <div class="linha_graficos">
-            <div class="grafico_card">
-                <h2>Produtos por Categoria</h2>
-                <div class="grafico_area">
-                <canvas id="grafico_categoria"></canvas>
-                </div>
-            </div>
-            
-            <div class="grafico_card">
-                <h2>Produtos com maior valor em estoque</h2>
-                <div class="grafico_area">
-                <canvas id="grafico_valor"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                    <div class="dashboard_dados">
+                         <div class="linha_dados" id="admin-cards">
+                              <div class="bloco_dado">
+                                   <h2>Total de produtos</h2>
+                                   <p class="valor_dado" id="quant_produto">00</p>
+                              </div>
+
+                              <div class="bloco_dado">
+                                   <h2>Total de ações no log</h2>
+                                   <p class="valor_dado" id="quant_ações">00</p>
+                              </div>
+
+                              <div class="bloco_dado">
+                                   <h2>Total de usuários</h2>
+                                   <p class="valor_dado" id="quant_user">00</p>
+                              </div>
+                         </div>
+
+                         <div class="linha_graficos">
+                              <div class="grafico_card">
+                                   <h2>Produtos por Categoria</h2>
+                                   <div class="grafico_area">
+                                        <canvas id="grafico_categoria"></canvas>
+                                   </div>
+                              </div>
+
+                              <div class="grafico_card">
+                                   <h2>Produtos com maior valor em estoque</h2>
+                                   <div class="grafico_area">
+                                        <canvas id="grafico_valor"></canvas>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+               </div>
           </main>
      </div>
 

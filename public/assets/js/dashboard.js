@@ -1,7 +1,19 @@
-import { initAuth, logout } from '../assets/js/utils/auth.js';
+import { initAuth, logout, verificarLogin, obterUsuarioAtual } from "../assets/js/utils/auth.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     initAuth();
+
+    if (!verificarLogin()) {
+        window.location.href = "../tela-login.html";
+        return;
+    }
+
+    const usuario = obterUsuarioAtual();
+    const adminCards = document.getElementById("admin-cards");
+
+    if (usuario.tipo !== "admin") {
+        adminCards.style.display = "none";
+    }
 
     const btnLogout = document.getElementById('btn-logout');
     if (btnLogout) {
