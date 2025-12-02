@@ -14,7 +14,7 @@ Aqui, neste repositório, você encontrará toda a estrutura *visual e interativ
 
 ## 🚀 Funcionalidades
 
-- Autenticação (Login, Cadastro, Recuperação de Senha, MFA).
+- Autenticação (Login, Cadastro, Recuperação de Senha, 2FA).
 - Dashboard para visualização de estoque.
 -  CRUD de produtos (criar, visualizar, editar e excluir).
 -  Logs do sistema.
@@ -27,7 +27,9 @@ Aqui, neste repositório, você encontrará toda a estrutura *visual e interativ
    - HTML5
    - CSS3
    - JavaScript 
-   - Bootstrap 
+   - Bootstrap
+   - ChartJS
+   - DiceBear
 
   ### Backend (outro repositório):
    - PHP 8
@@ -38,6 +40,8 @@ Aqui, neste repositório, você encontrará toda a estrutura *visual e interativ
    - Git & GitHub (controle de versão)
    - MVC (arquitetura base: Models, Views, Controllers)
    - Services (serviços auxiliares, como autenticação e logs)
+   - Trello
+   - Figma
 <br> <br>
 
 ## 🌱 Fluxo de Branches
@@ -47,6 +51,3 @@ O versionamento segue uma adaptação do *Git Flow*:
 - *main* → branch estável, sempre pronta para deploy.  
 - *dev* → branch de integração, onde todas as features são testadas juntas.  
 - *feature/* → usada para novas funcionalidades (ex: feature/login, feature/componentes-modal).  
-- *fix/* → correções pequenas.  
-- *hotfix/* → correções urgentes direto no main.  
-- *docs/* → atualizações de documentação
